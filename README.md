@@ -1,2 +1,0 @@
-# KingCloud
-Private cloud project

@@ -1,0 +1,819 @@
+<!DOCTYPE html> <!--声明是HTML-->
+<html lang="ZH-ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>相册</title><!--标题-->
+
+    <style>/*CSS代码书写位置*/
+
+        /*背景部分*/
+        .bj1/*大背景*/
+        {
+            background-color: aliceblue;/*颜色*/
+
+            position: fixed;/*不随页面滑动变化*/
+            width: 1700px;
+            height: 942px;
+            top:0;
+            left: 0;/*位置与大小*/
+            z-index: -1;/*-1指的是图层最下层*/
+        }
+
+        .bj2/*主视栏背景*/
+        {
+            background-color: #ffffff;/*颜色*/
+
+            position: fixed;/*不随页面滑动变化*/
+            width: 1400px;
+            height: 770px;
+            top:110px;
+            left: 250px;/*位置与大小*/
+
+            border-radius: 10px;
+            box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);/*样式，圆角与阴影*/
+
+            /*PS.rgba是指的是红绿蓝与透明度，#后面的是红绿蓝16进制书写码*/
+
+        }
+
+
+
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~这是一条华丽的分割线~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+
+
+        /*特殊按钮部分*/
+        .anniu1/*按钮1,“添加”按钮*/
+        {
+            background-color: aliceblue;/*颜色*/
+
+            position: fixed;/*不随页面滑动变化*/
+            width: 230px;
+            height: 45px;
+            top: 152px;
+            left: 8.5px;/*位置与大小*/
+
+            /*border-radius: 50px;*/
+            border: none;
+
+            display: flex;/*弹性布局，至今不知道有什么用*/
+            align-items: center;
+            justify-content: center;/*文本垂直与水平居中，抄的，看不懂*/
+
+            font-size: 18px;
+            font-weight: bold;/*字体大小和粗细*/
+
+
+
+            user-select: none;/*禁止选中文本*/
+
+        }
+        .anniu1:hover/*按钮1,“添加”按钮,选中颜色*/{box-shadow: 0 3px 5px 0 rgba(0,0,0,0.4);/*样式，圆角与阴影*/top: 140px}
+         /*.anniu1:active {background-color: #87d6d8  !important;}*/
+
+
+         /*“添加”按钮隐藏框*/
+        .anniu1-ziqun{
+
+            background-color:aliceblue;
+
+            position: fixed;/*不随页面滑动变化*/
+            width: 13%;
+            height: clamp(90px,4%,600px);
+            top: clamp(150px,16% + 50px,600px);
+            left: 1%;/*位置与大小*/
+            min-width: 150px; /*最小大小*/
+
+
+            border-radius: 10px;
+            box-shadow: 0 0.5mm 5px 0 rgba(0,0,0,0.4);/*圆角和阴影*/
+
+
+            overflow-y: auto;
+
+            user-select: none;/*禁止用户选中文本*/
+
+            z-index: 1;/*-1指的是图层最下层*/
+        }
+
+        .anniu1-ziqun a{
+
+            height: 50%;/*高度占div的50%*/
+
+            display: flex;/*弹性布局*/
+            margin: 0 auto;/*按钮居中与间距*/
+
+            font-size: 15px;/*字体大小*/
+
+            align-items: center;
+            padding: 0 10px 0 15px;/*居中和手动居中*/
+        }
+
+        .anniu1-ziqun a:hover {background-color: #eeeeee ;}/*当鼠标悬浮时变色*/
+
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~这是另一条华丽的分割线~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+
+
+        .anniu2/*“设置按钮”*/
+        {
+            background-color: #e7f4ff;/*颜色*/
+
+            position: fixed;/*不随页面滑动变化*/
+            width: 230px;
+            height: 56.5px;
+            top: 857px;
+            left: 8.5px;/*位置与大小*/
+
+            box-shadow: 0 0 3px 0 rgba(0,0,0,0.7);/*样式，阴影*/
+
+            display: flex;/*弹性布局，至今不知道有什么用*/
+            align-items: center;
+            justify-content: center;/*文本垂直与水平居中，抄的，看不懂*/
+
+            font-size: 20px;
+            font-weight: initial;/*字体大小和粗细*/
+
+            border: none;
+
+            user-select: none;/*禁止选中文本*/
+
+        }
+
+        .anniu3/*按钮3,“返回”按钮*/
+        {
+            background-color: #e7f4ff;/*颜色*/
+
+            position: fixed;/*不随页面滑动变化*/
+            width: 64.36px;
+            height: 65.89px;
+            top: 28px;
+            left: 50px;
+            z-index: 2; /*位置与大小，图层层数*/
+            min-width: 32px;
+            object-fit: contain;/*最小大小并保持关键比例*/
+
+            box-shadow: 0 0 1px 0 rgba(0,0,0,0.4);/*样式，阴影*/
+
+            display: flex;/*弹性布局，至今不知道有什么用*/
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px 0 0;/*文本垂直与水平居中，抄的，看不懂*/
+
+            font-size: 30px;
+            font-weight: bolder;/*字体大小和粗细*/
+
+            border: none;
+
+            user-select: none;/*禁止选中文本*/
+        }
+
+
+
+        .anniu2:hover/*按钮2,“设置”按钮,选中颜色*/{background-color: antiquewhite;}
+        .anniu3:hover/*按钮3,“搜索”按钮,选中颜色*/{background-color: antiquewhite;}/*当鼠标悬浮时变色*/
+
+        .anniu2:active {background-color: #87d6d8  !important;}
+        .anniu3:active {background-color: #87d6d8  !important;}/*JavaScript,可以使鼠标按下后保持激活状态，看不懂思密达*/
+
+
+
+
+
+
+    /*--------------------------------------------这是一条普通的分割线----------------------------------------------------*/
+
+
+
+
+
+
+        /*侧边滑动框部分*/
+        .huadongkuang/*滑动框*/
+        {
+            background-color: aliceblue;/*颜色*/
+
+            position: fixed;/*不随页面滑动变化*/
+            width: 230px;
+            height: 612px;
+            top: 236px;
+            left: 8.5px;/*位置与大小*/
+
+            border-radius: 10px;
+            /*box-shadow: 0 0 1px 0 rgba(0,0,0,0.3);/*样式，圆角与阴影*/
+
+            overflow-y: auto;/*滑动框制作*/
+
+        }
+
+       .huadongkuang a/*滑动框内按钮设置*/
+       {
+           /*background-color: #e7f4ff;/*颜色*/
+
+           width: 85%;
+           height: clamp(45px,8%,400px);/*长宽*/
+           left: 0.5%;/*到左边距离*/
+
+           border-radius: 10px;/*圆角*/
+
+           display: flex;/*弹性布局*/
+           margin: 10px auto;/*按钮居中与间距*/
+
+           align-items: center;
+           justify-content: left;
+           padding: 0 0 0 5%;/*文本垂直与水平居中，抄的，看不懂*//*文本垂直与水平居中*/
+
+           font-weight: bold;/*字体加粗*/
+
+           user-select: none;/*禁止选中文本*/
+        }
+
+        .huadongkuang a:hover {background-color: antiquewhite;}/*当鼠标悬浮时变色*/
+        .huadongkuang a:active {background-color: #87d6d8  !important;}/*JavaScript,可以使鼠标按下后保持激活状态，看不懂思密达*/
+
+
+        a.select{background:linear-gradient(to bottom right,#87d6d8,#c3eaeb) !important;}/*按钮被选择时样式*/
+
+       .zianniu
+       {
+           width: 80%!important;
+           height: 32px!important;/*长宽*/
+           font-weight: normal!important;/*普通字体设定*/
+           justify-content: left !important;
+           padding: 0 0 0 10%!important;
+
+
+       }
+
+       .bukeshi{
+           display:none!important;/*按钮隐藏标签*/
+       }
+
+
+
+
+
+    /*du~dulu~du~dulu~du~dulu~du~dulu~du~dulu~du~dulu~这是一条奇怪的分割线du~dulu~du~dulu~du~dulu~du~dulu~du~dulu~du~dulu~*/
+
+
+
+
+
+
+        /*搜索框部分*/
+       .ssrq/*搜索容器*/
+       {
+           display: flex;/*内容并列*/
+           position: fixed;/*不随滑动滑动*/
+           width: 1345px;
+           height: 47px;
+           top: 40px;
+           left: 280px;/*位置*/
+
+           border-radius: 50px;/*圆角*/
+
+       }
+
+       .ssrq:hover input{border-color: white;box-shadow:0 0 10px white}/*当鼠标悬浮时变色*/
+
+       .ianniu1/*按钮3,“搜索”按钮*/
+        {
+           background-color: #e7f4ff;/*颜色*/
+
+           width: 100px;
+
+           /*margin-left: -4%;/*外边距位置微调，“意思是靠我近一点”，用right的负值不可行*/
+
+           border-width: 1px;
+           border-radius: 0 50px 50px 0;
+           box-shadow: 0 0 1px 0 rgba(0,0,0,0.4);/*样式，圆角与阴影*/
+
+           display: flex;
+           line-height: 1;
+           align-items: center;
+           justify-content: center;/*文本垂直与水平居中*/
+
+           font-size: 20px;
+           font-weight: initial;/*字体大小和粗细*/
+
+           user-select: none;/*禁止选中文本*/
+        }
+
+       .ianniu1:hover{background-color: antiquewhite;}/*当鼠标悬浮时变色*/
+       .ianniu1:active {background-color: #87d6d8  !important;}/*JavaScript,可以使鼠标按下后保持激活状态，看不懂思密达*/
+
+       .ssk/*搜索框*/
+       {
+           /*width: 100%;*/
+           flex:1;/*不知道是个什么东西，据说可以让让文本框占据父容器剩余的空间*/
+
+           padding: 0 0 0 10px;/*文本位置微调*/
+
+           border-radius: 50px 0 0 50px;
+           box-shadow: 0 0 1px 0 rgba(0,0,0,0.4);/*样式，圆角与去掉右边框，阴影，*/
+
+           /*display: flex;
+           align-items: center;
+           justify-content: center;/*文本垂直与水平居中*/
+
+           font-size: 20px;
+           font-weight: initial;/*字体大小和粗细*/
+
+           user-select: none;/*禁止选中文本*/
+
+           border:1px solid black;/*边框 厚度为1px 没有“凹陷”染色 黑色勾线 */
+           outline: none;
+       }
+
+       .ssk:hover{border:1px solid black !important; cursor: text;}
+       .ssk:focus{border:2px solid #87d6d8 !important;}
+       .ssk:active{border:2px solid #87d6d8 !important}
+
+/*--往年今日--往年今日--往年今日--往年今日--往年今日-- 这是一条特征鲜明的分界线 --往年今日--往年今日--往年今日--往年今日--往年今日--往年今日--*/
+
+
+    /*-----------------------------------------------分界线……----------------------------------------------------------*/
+    /*往年今日界面*/
+    .riqi/*日期样式*/
+    {
+        position: fixed;/*不随页面滑动变化*/
+        display: inline-block;/*使其可以控制大小*/
+
+        height: 30px;
+        top:120px;
+        left:275px;/*大小限制*/
+
+        font-size:30px;/*字体大小*/
+
+        user-select: none;/*禁止选中文本*/
+    }
+
+
+    .rili/*日历样式*/
+    {
+
+        position: fixed;/*不随页面滑动变化*/
+        background-color: #f9f9f9;/*背景颜色*/
+
+        height:400px;
+        width: 300px;
+        top:175px;
+        left:270px;
+
+        padding:20px 0 0 30px;
+
+        border-radius: 10px;
+        box-shadow: 0 0 3px 0 rgba(0,0,0,0.4);/*圆角与阴影*/
+
+        user-select: none;/*禁止用户选中*/
+
+        visibility: hidden;/*隐藏，也可以用visibility: hidden;*/
+        opacity: 0;/*透明度*/
+        transform: scale(0.3);/*缩放*/
+        transform-origin: left top;/*以上左方向为中心缩放*/
+        transition: opacity 0.3s ease 0s , visibility 0.3s ease-in-out 0s,transform 0.2s ease 0s;/*变化范围，方向*/
+    }
+
+    .riqi:hover .rili/*在悬浮在日期上时，日历接触隐藏*/
+    {
+        opacity: 1;/*透明度1，不透明*/
+        visibility: visible;/*可视*/
+        transform: scale(1);/*缩放为1，原本大小*/
+    }
+
+    .rili a/*日历内部按钮*/
+    {
+        padding: 0 2% 0 2% ;
+        margin: 1%;/*各个按钮相对位置*/
+
+        border-radius: 100%;/*圆角100%*/
+
+        font-size: 20px!important;
+        font-weight: lighter!important;/*字体大小*/
+    }
+    .riqi a:hover/*悬浮在日期内部按钮时的样式*/
+    {
+        background-color: #7182cf;/*背景色*/
+    }
+    /*------------------------------------------------…………------------------------------------------------------------*/
+    .sx-sj  ,.sx-nf/*筛选，此处特指时间的“新的在前”和“旧的在前”*/
+    {
+        position: fixed;/*禁止被滚动*/
+        width: 170px;
+        height: 50px;/*大小*/
+        top:120px;
+        left:550px;/*位置*/
+
+
+        border-radius: 30px;
+        box-shadow: 0 0 3px 0 rgba(0,0,0,0.4);/*圆角与阴影*/
+
+
+        display: flex;/*弹性布局，至今不知道有什么用*/
+        align-items: center;
+        justify-content: center;/*文本垂直与水平居中，抄的，看不懂*/
+
+        font-size: 20px;
+        font-weight: normal;/*字体大小*/
+
+        user-select: none;/*禁止用户选中*/
+    }
+
+    .sx-sj:hover  ,.sx-nf:hover{background-color: #e5e5e5;}
+
+    .sx-sjq  ,.sx-nfq/*筛选（子）群*/
+    {
+        position: fixed;
+        width: 170px;
+        height: 80px;
+        top:175px;
+        left:550px;/*大小与位置*/
+
+
+        background-color:  #f9f9f9;/*背景颜色*/
+
+
+        border-radius: 10px;
+        box-shadow: 0 0 3px 0 rgba(0,0,0,0.4);/*圆角与阴影*/
+
+        font-size: 15px;/*字体大小*/
+
+        user-select: none;/*禁止用户选中*/
+
+        visibility: hidden;/*隐藏，不可视*/
+        transform: scaleY(0);/*纵向缩放*/
+        transform-origin:top;/*以上边框为中心缩放*/
+        transition: opacity 0.3s ease 0s , visibility 0.2s ease-in-out 0s,transform 0.2s ease 0s;/*变化范围，方向*/
+    }
+
+    .sx-sjq a  ,.sx-nfq a/*筛选子群的按钮*/
+    {
+        height: 50%;/*各占据div的一半*/
+
+        display: flex;/*弹性布局*/
+        margin: 0 auto;/*按钮居中与间距*/
+
+        font-size: 15px;/*字体大小*/
+
+        align-items: center;
+        padding: 0 10px 0 15px;/*居中*/
+
+    }
+
+    .sx-sj:hover+.sx-sjq , .sx-sjq:hover   ,.sx-nf:hover+.sx-nfq , .sx-nfq:hover/* +是选择后面紧接着的 ~选择后面所有的同类的  ,是并列两个选择器*/
+    {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);/*显示后的终态*/
+    }
+
+    .sx-sjq a:hover,.sx-nfq a:hover{background-color: #e5e5e5;}/*悬浮时按钮颜色*/
+
+
+    /*---------------------------------------------咦？这真的是一条分界线吗？----------------------------------------------*/
+    .sx{
+        position: fixed;/*禁止被滚动*/
+        width: 70px;
+        height: 50px;/*大小*/
+        top:120px;
+        left:750px;/*位置*/
+
+
+        border-radius: 30px;
+        box-shadow: 0 0 3px 0 rgba(0,0,0,0.4);/*圆角与阴影*/
+
+
+        display: flex;/*弹性布局，至今不知道有什么用*/
+        align-items: center;
+        justify-content: center;/*文本垂直与水平居中，抄的，看不懂*/
+
+        font-size: 20px;
+        font-weight: normal;/*字体大小*/
+
+        user-select: none;/*禁止用户选中*/
+    }
+
+    .sx:hover{background-color: #e5e5e5;}
+
+
+    .sxq/*筛选子群的按钮*/
+    {
+        position: fixed;
+        width: 225px;
+        height: 300px;
+        top:175px;
+        left:750px;/*大小与位置*/
+
+
+        background-color:  #f9f9f9;/*背景颜色*/
+
+        border-radius: 10px;
+        box-shadow: 0 0 3px 0 rgba(0,0,0,0.4);/*圆角与阴影*/
+
+        font-size: 15px;/*字体大小*/
+
+        user-select: none;/*禁止用户选中*/
+
+        visibility: hidden;/*隐藏，不可视*/
+        transform: scaleY(0);/*纵向缩放*/
+        transform-origin:top;/*以上边框为中心缩放*/
+        transition: opacity 0.3s ease 0s , visibility 0.2s ease-in-out 0s,transform 0.2s ease 0s;/*变化范围，方向*/
+
+    }
+
+
+
+    .sxq a/*筛选子群的按钮*/
+    {
+        height: 12%;/*各占据div的一半*/
+
+        display: flex;/*弹性布局*/
+        margin: 0 auto;/*按钮居中与间距*/
+
+        font-size: 15px;/*字体大小*/
+
+        align-items: center;
+        padding: 0 10px 0 15px;/*居中*/
+
+    }
+
+     .sx:hover+.sxq , .sxq:hover/* +是选择后面紧接着的 ~选择后面所有的同类的  ,是并列两个选择器*/
+    {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);/*显示后的终态*/
+    }
+
+    .sxq a:hover{background-color: #e5e5e5;}/*悬浮时按钮颜色*/
+
+    </style>
+<body><!--主体显示部分，HTML编程的位置-->
+
+<div class="bj1"><!--大背景-->
+<div class="bj2"></div><!--次级背景-->
+
+<button class="anniu3" onclick="history.back()"><</button><!--返回键-->
+
+<form action="#" class="ssrq"><!--搜索框表单-->
+
+    <input type="text"  placeholder="搜索图片与相册" class="ssk"><!--搜索框文本区-->
+    <input type="submit" value="搜索" class="ianniu1"><!--搜索框按钮-->
+
+</form>
+
+<nav><!--导航栏容器，重要容器标签-->
+
+
+    <div>
+        <button class="anniu1" data-1guanlian="anniu1-ziqun">+&emsp;添加</button><!--“添加按钮”-->
+        <div class="anniu1-ziqun" id="anniu1-ziqun">
+            <a>添加私有云照片</a>
+            <a>添加电脑照片</a>
+        </div>
+    </div>
+
+
+    <div class="huadongkuang"><!--导航栏滑动框-->
+        <a class="anniu" data-guanlian="zianniu1">全部照片</a><!--class=按扭 data-关联=子按钮-->
+        <div class="zianniuqun" id="zianniu1"><!--class=子按钮群 id=子按钮1-->
+            <a class="zianniu" data-guanlian="往年今日">往年今日</a>
+            <a class="zianniu" data-guanlian="按年查看">按年查看</a>
+            <a class="zianniu">我喜欢的</a>
+        </div>
+        <a class="anniu" data-guanlian="zianniu2">AI识图</a>
+         <div class="zianniuqun" id="zianniu2">
+            <a class="zianniu">人脸识别</a>
+            <a class="zianniu">动物识别</a>
+            <a class="zianniu">植物识别</a>
+            <a class="zianniu">场景分类</a>
+            <a class="zianniu">我的足迹</a>
+        </div>
+        <a class="anniu" data-guanlian="zianniu3">相册</a>
+         <div class="zianniuqun" id="zianniu3">
+            <a class="zianniu">家庭共享</a>
+            <a class="zianniu">普通相册</a>
+            <a class="zianniu">手机备份相册</a>
+        </div>
+        <a class="anniu" data-guanlian="zianniu4">工具箱</a>
+         <div class="zianniuqun" id="zianniu4">
+            <a class="zianniu">照片去重</a>
+            <a class="zianniu">相似照片清理</a>
+            <a class="zianniu">相册清除记录</a>
+        </div><!--各类按钮-->
+    </div>
+    <button class="anniu2">设置</button><!--设置按钮-->
+
+
+    <div class="面板" id="往年今日">
+        <!--设时间-->
+        <div class="riqi">   <div class="rili">无法获取时间</div>   </div>
+        <!--同一菜单栏的东西-->
+
+        <div class="sx-sj"></div>
+        <div class="sx-sjq">
+                <a>新拍摄在前</a>
+                <a>旧拍摄在前</a>
+        </div>
+
+        <div class="sx">筛选</div>
+        <div class="sxq">
+            <div style="padding: 10px 0 10px 10px;">按内容类型</div>
+                <a>全部</a>
+                <a>图片</a>
+                <a>视频</a>
+            <div style="padding: 10px 0 10px 10px;">按添加的文件</div>
+                <a>全部</a>
+                <a>最近添加</a>
+                <a>较早添加</a>
+        </div>
+    </div>
+
+    <div class="面板" id="按年查看">
+        <div class="sx-nf"></div>
+        <div class="sx-nfq">
+                <a>新年份在前</a>
+                <a>旧年份在前</a>
+        </div>
+
+        <div class="sx">筛选</div>
+        <div class="sxq">
+            <div style="padding: 10px 0 10px 10px;">按内容类型</div>
+                <a>全部</a>
+                <a>图片</a>
+                <a>视频</a>
+            <div style="padding: 10px 0 10px 10px;">按添加的文件</div>
+                <a>全部</a>
+                <a>最近添加</a>
+                <a>较早添加</a>
+        </div>
+    </div>
+
+
+</nav>
+</div>
+
+
+
+
+
+<script>
+    //滑动框的选中与隐藏//
+    function hcqh (djan,zq,xyfs,o) {//互斥切换 互斥按钮的子页面切换（显示）设置   “点击按钮”-互斥按钮的class,“子群”的class,“响应方式”,点击本身是否切换////要配合 ‘点击按钮’ data-guanlian 和‘子群’id使用//
+        Array.from(document.getElementsByClassName(djan)).forEach
+        (a => {//将返回的类数组改为数组，然后执行以下内容（a是一个方便调用的变量）//
+
+            Array.from(document.getElementsByClassName(zq)).forEach(zq => zq.classList.add('bukeshi'))//确保展开按钮初始为隐藏状态//
+
+            a.addEventListener
+            (xyfs,//加入事件监听器，执行以下内容，function 与 * =>用法相同//
+                function () {
+
+
+                    const guanlianId = this.getAttribute('data-guanlian');//获取之前用于关联的data-* //
+                    const shiyong = document.getElementById(guanlianId);//寻找与先前data-* 的字符串相同的id//
+
+
+                    if (shiyong.classList.contains('bukeshi')) {
+                        Array.from(document.getElementsByClassName(zq)).forEach(zq => zq.classList.add('bukeshi'));
+                        shiyong.classList.remove('bukeshi')//使用//为具备以上id的对象更改“不可视”标签，进行显示或隐藏//
+
+                    } else if(o){
+                            Array.from(document.getElementsByClassName(zq)).forEach(zq => zq.classList.add('bukeshi'));
+                    }
+                    //如果被关联的子按钮群隐藏，就让所有的都隐藏，除开其本身显示；如果反之，则让所有的隐藏//
+                    // P.S. contains用于检测该节点是否含有某标签；//
+                }
+            );
+        });
+    }
+
+
+    //当互斥按钮被选中时，更换状态//
+    function xuan_zhong(zi_an_niu) {//互斥选中的class名//
+        Array.from(document.getElementsByClassName(zi_an_niu)).forEach
+        (a => {//将返回的类数组改为数组，然后执行以下内容（a是一个方便调用的变量）//
+
+            a.addEventListener
+            ('click',//加入事件监听器，执行以下内容，function 与 * =>用法相同//
+                function () {
+                    Array.from(document.getElementsByClassName(zi_an_niu)).forEach(anniu => anniu.classList.remove('select'));//将返回的类数组改为数组，对所有相关对象，移除选择标签，不被选中//
+                    this.classList.add('select');//给这个加如选中标签，选中它//
+
+                }
+            );
+        });
+    }
+
+    hcqh('anniu','zianniuqun','dblclick',true);//菜单界面分级的互斥切换//
+    xuan_zhong('zianniu');//菜单互斥子按钮的状态改变//
+    xuan_zhong('anniu');//菜单互斥子父按钮的状态改变//
+
+
+    //--------------------------------------------这是一条普通的分割线----------------------------------------------------//
+
+    //添加按钮的扩展栏隐藏//
+    const anniu1 = document.getElementsByClassName("anniu1");
+    const anniu1_ziqun = document.getElementsByClassName("anniu1-ziqun");//访问两个标签//
+    Array.from(anniu1_ziqun).forEach(anniu1_ziqun => anniu1_ziqun.classList.add('bukeshi'));//确保隐藏栏初始为隐藏状态//
+
+    Array.from(anniu1).forEach
+    (anniu1 =>
+        anniu1.addEventListener//给“添加”按钮添加事件//
+        ('click',
+            function (e)
+            {
+                e.stopPropagation();
+                Array.from(anniu1_ziqun).forEach(anniu1_ziqun => anniu1_ziqun.classList.toggle('bukeshi'));//按下按钮在隐藏模式中互换//
+            }
+        )
+    )
+
+
+    document.addEventListener//给<html>添加事件//
+    ('click',
+        function (e) //获取事件的详细信息//
+        {
+            if(!e.target.closest('.anniu1-ziqun'))//按下其他地方（target是获取事件的详情（可获取其中元素），closest是审查祖先元素是否存在该标签）//
+                {
+                    Array.from(anniu1_ziqun).forEach(anniu1_ziqun => anniu1_ziqun.classList.add('bukeshi'));//隐藏隐藏栏//
+                }
+        }
+    );
+
+    //--------------------------------------------这是一条不想取名的分割线—^— ---------------------------------------------//
+
+
+
+    //日历时间板块//
+    const Zh_shuzi =["零","一","二","三","四","五","六","七"];
+    const xingqi =Zh_shuzi [new Date().getDay()];//“星期”数字的中文映射库//
+
+
+    const riqi = document.getElementsByClassName('riqi')[0];//获取日期节点//
+    const time=((new Date().getMonth()+1)+"月"+new Date().getDate()+"日"+"\u2007"+"星期"+xingqi);//将要显示的时间按格式书写//
+    const text = riqi.childNodes[0]//选中日期节点//
+    text.textContent=time;//书写时间//
+
+
+    let m = '';//创建一个空的元素//
+    for(let i = 1;i<=12;i++)//把12个月份的按钮生成出来//
+    {
+        m+='<a >'+i+'月'+'</a>'
+        if(i%5 === 0){
+            m+="<br\>";
+        }
+    }//添加月份按钮//
+    for(let day = 1,n=new Date(new Date().getFullYear(),new Date().getMonth()+1,0).getDate();day <= n;day++)//获取本月天数，并把这个月份的天数的按钮生成出来//
+    {
+        m +='<a>'+String(day).padEnd(2,"\u2007")+'</a>'//\u2007是我已知唯一能在这里用不被吞的空格//
+        console.log(day);//调试时看  部分代码  是否正常运行的//
+        if(day%7 === 0){
+            m+="<br\>";
+        }
+
+    }//添加每月日期//
+    const rili = document.querySelector(".rili");//选择要书写的父标签//
+    rili.innerHTML = m;//书写在标签内//
+
+
+    //--------------------------------------------这是一条专注的分割线 o.o -----------------------------------------------//
+
+    //父按钮的文本显示切换//
+    function xsqh (fu,zi,zi_qun) {  //显示切换   父 的.***（显示主体），子 的.***（被显示体）,子群的.***（子体的集合）////配合父与子的class使用，理论上讲其他合理属性也可以//
+        document.querySelector(zi).classList.add('xs-tag');//为第一个添加 显示标记//
+        document.querySelector(fu).textContent = document.querySelector(zi_qun).querySelector('.xs-tag').textContent;//默认选中第一个并"显示"//
+
+        document.querySelectorAll(zi).forEach(
+            a =>
+                a.addEventListener('click',
+                    function () {
+                        document.querySelectorAll(zi).forEach(a => a.classList.remove('xs-tag'));//返回一个数组，对所有相关对象，移除选择标签，不被标记//
+                        this.classList.add('xs-tag')//添加显示的标记//
+
+                        document.querySelector(fu).textContent = document.querySelector(zi_qun).querySelector('.xs-tag').textContent;//把有标记的显示在按钮上//
+                    }
+                )
+        )
+    }
+    //“先拍摄在前”，“后拍摄在前”//
+    xsqh('.sx-sj','.sx-sjq a','.sx-sjq');
+    xsqh('.sx-nf','.sx-nfq a','.sx-nfq');
+
+    //--------------------------------------------这是一条困倦的分割线 #^# -----------------------------------------------//
+
+    //面板随菜单按钮切换//
+    hcqh('zianniu','面板','click',false);
+
+
+
+
+
+</script>
+
+</body>

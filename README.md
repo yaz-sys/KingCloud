@@ -87,7 +87,3 @@ npm test
 3.  提交您的更改 (`git commit -m 'Add some feature'`)。
 4.  推送到该分支 (`git push origin feature/YourFeature`)。
 5.  提交 Pull Request。
-
-## 许可证
-
-本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件。
